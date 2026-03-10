@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Initialize Categories</title>
+</head>
+<body>
+    <h1>Initialize Recipe Categories</h1>
+    <button onclick="initializeCategories()">Initialize Categories</button>
+    <div id="result"></div>
+
+    <script>
+        async function initializeCategories() {
+            try {
+                const response = await fetch('http://localhost:5000/api/categories/initialize', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const data = await response.json();
+                document.getElementById('result').innerHTML = 
+                    '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                document.getElementById('result').innerHTML = 
+                    'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
